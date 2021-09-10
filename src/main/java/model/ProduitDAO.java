@@ -94,6 +94,30 @@ public class ProduitDAO {
 			return null;
 		}
 	}
+	public ArrayList<Produit> getAllByCategorieId(int id) {
+		ArrayList<Produit> Produits = new ArrayList<Produit>();
+		try {
+			PreparedStatement ps = Database.connexion.prepareStatement("SELECT * FROM produits WHERE categorie_id=? ");
+			ps.setInt(1, id);
+			ResultSet resultat = ps.executeQuery();
+			while (resultat.next()) {
+				Produit c = new Produit();
+				c.setId(resultat.getInt("id"));
+				c.setTitre(resultat.getString("titre"));
+				c.setPrix(resultat.getDouble("prix"));
+				c.setQte(resultat.getInt("qte"));
+				c.setCategorie_id(resultat.getInt("categorie_id"));
+				c.setImage(resultat.getString("image"));
+				Produits.add(c);
+			}
+
+			return Produits;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
 
 	public void deleteById(int id) {
 		try {

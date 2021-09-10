@@ -91,5 +91,6 @@ public class CategorieDAO {
 			System.out.println("DELETED NO");
 		}
 	}
+	
 
 }
